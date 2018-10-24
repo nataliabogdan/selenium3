@@ -1,4 +1,4 @@
-package training;
+package training.tests;
 
 import org.junit.After;
 import org.junit.Before;
@@ -13,8 +13,8 @@ public class TestBase {
   @Before
   public void start(){
     driver = new ChromeDriver();
-    driver.manage().window().maximize();
     wait = new WebDriverWait(driver, 10);
+    driver.manage().window().maximize();
   }
 
   @After

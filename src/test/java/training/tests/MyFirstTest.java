@@ -1,4 +1,4 @@
-package training;
+package training.tests;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -16,6 +16,5 @@ public class MyFirstTest extends TestBase {
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("resultTable")));
     String artifactId = driver.findElement(By.xpath("//a[@id='artifactId']")).getText();
     Assert.assertEquals(artifactId, value);
-
   }
 }
