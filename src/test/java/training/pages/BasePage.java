@@ -7,7 +7,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 class BasePage {
   WebDriver driver;
-  private WebDriverWait wait;
+  WebDriverWait wait;
 
   //Constructor
   BasePage(WebDriver driver, WebDriverWait wait){

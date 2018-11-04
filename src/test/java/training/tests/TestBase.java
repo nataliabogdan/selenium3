@@ -4,6 +4,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class TestBase {
@@ -12,9 +14,18 @@ public class TestBase {
 
   @Before
   public void start(){
-    driver = new ChromeDriver();
-    wait = new WebDriverWait(driver, 10);
-    driver.manage().window().maximize();
+     //full mode
+    ChromeOptions options = new ChromeOptions();
+    options.addArguments("start-maximized");
+    DesiredCapabilities caps = new DesiredCapabilities();
+    caps.setCapability(ChromeOptions.CAPABILITY, options);
+    driver = new ChromeDriver(caps);
+
+//    InternetExplorerOptions options = new InternetExplorerOptions();
+//    options.ignoreZoomSettings();
+//    driver = new InternetExplorerDriver(options);
+//    driver.manage().window().maximize();
+//    wait = new WebDriverWait(driver, 10);
   }
 
   @After
