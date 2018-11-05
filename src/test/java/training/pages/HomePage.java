@@ -5,7 +5,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class HomePage extends BasePage {
 
-  String baseURL = "http://localhost/litecart/admin/";
+  private final String baseURL = "http://localhost/litecart/admin/";
 
   public HomePage(WebDriver driver, WebDriverWait wait) {
     super(driver, wait);

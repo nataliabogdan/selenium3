@@ -11,5 +11,4 @@ public class NavigationByMenuTest extends TestBase {
     AdminNavigationMenu navigationMenu = new AdminNavigationMenu(driver, wait);
     navigationMenu.openApps();
   }
-
 }

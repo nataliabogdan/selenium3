@@ -11,9 +11,13 @@ import training.pages.AdminPage;
 import training.pages.HomePage;
 import training.pages.LoginPage;
 
+import java.util.concurrent.TimeUnit;
+
 public class TestBase {
   WebDriver driver;
   WebDriverWait wait;
+
+  private final String shopURL = "http://localhost/litecart";
 
   @Before
   public void start(){
@@ -23,6 +27,10 @@ public class TestBase {
     DesiredCapabilities caps = new DesiredCapabilities();
     caps.setCapability(ChromeOptions.CAPABILITY, options);
     driver = new ChromeDriver(caps);
+    //неявные ожидания. используется для findElement - заметят появление быстрее. Для присутствия элемента
+    driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+    //явное ожидание wait.until().... для отсутсвия
+    wait = new WebDriverWait(driver, 10);
 
 //    InternetExplorerOptions options = new InternetExplorerOptions();
 //    options.ignoreZoomSettings();
@@ -36,6 +44,11 @@ public class TestBase {
     homePage.goToLoginPage();
     LoginPage loginPage = new LoginPage(driver,wait);
     loginPage.loginByAdmin();
+  }
+
+  //Goto Shop page
+  public void goToShopPage(){
+    this.driver.get(shopURL);
   }
 
   @After
