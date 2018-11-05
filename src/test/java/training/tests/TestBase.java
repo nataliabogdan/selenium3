@@ -7,6 +7,9 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import training.pages.AdminPage;
+import training.pages.HomePage;
+import training.pages.LoginPage;
 
 public class TestBase {
   WebDriver driver;
@@ -26,6 +29,13 @@ public class TestBase {
 //    driver = new InternetExplorerDriver(options);
 //    driver.manage().window().maximize();
 //    wait = new WebDriverWait(driver, 10);
+  }
+
+  public void loginByAdmin(){
+    HomePage homePage = new HomePage(driver,wait);
+    homePage.goToLoginPage();
+    LoginPage loginPage = new LoginPage(driver,wait);
+    loginPage.loginByAdmin();
   }
 
   @After
