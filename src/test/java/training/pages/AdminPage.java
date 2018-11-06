@@ -27,6 +27,8 @@ public class AdminPage extends BasePage {
   private WebElement widgetDiscussions;
   @FindBy(xpath = "//div[@class='notice success']")
   private WebElement message;
+  @FindBy(xpath = "//span[text()='Countries']")
+  private WebElement countrylink;
 
   public AdminPage(WebDriver driver, WebDriverWait wait) {
     super(driver, wait);
@@ -46,4 +48,10 @@ public class AdminPage extends BasePage {
   public String getNoticeMessage(){
     return this.message.getText();
   }
+
+  //Goto Countries page
+  public void goToCountryPage(){
+    this.countrylink.click();
+  }
+
 }
