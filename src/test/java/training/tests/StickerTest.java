@@ -7,8 +7,7 @@ public class StickerTest extends TestBase {
 
   @Test
   public void checkStikers(){
-    this.goToShopPage();
-    ShopHomePage shop = new ShopHomePage(driver, wait);
+    ShopHomePage shop = this.goToShopPage();
     shop.stickersVerification();
   }
 }

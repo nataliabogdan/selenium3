@@ -3,6 +3,7 @@ package training.pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
@@ -17,9 +18,21 @@ public class AdminNavigationMenu extends BasePage {
   private List<WebElement> subApps;
   @FindBy(tagName = "h1")
   private WebElement header;
+  @FindBy(id = "box-apps-menu")
+  private WebElement appsBox;
 
-  public AdminNavigationMenu(WebDriver driver, WebDriverWait wait) {
+  private AdminNavigationMenu(WebDriver driver, WebDriverWait wait) {
     super(driver, wait);
+  }
+
+  public static AdminNavigationMenu getNewInstance(WebDriver driver, WebDriverWait wait){
+    final AdminNavigationMenu page = new AdminNavigationMenu(driver, wait);
+    page.waitUntilVisible();
+    return page;
+  }
+
+  private void waitUntilVisible() {
+    this.wait.until(ExpectedConditions.visibilityOf(this.appsBox));
   }
 
   public void openApps(){

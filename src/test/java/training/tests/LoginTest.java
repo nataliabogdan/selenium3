@@ -1,21 +1,19 @@
 package training.tests;
 
-import org.junit.Assert;
 import org.junit.Test;
 import training.pages.AdminPage;
-import training.pages.HomePage;
 import training.pages.LoginPage;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class LoginTest extends TestBase {
 
   @Test
   public void loginByAdmin(){
-    HomePage homePage = new HomePage(driver,wait);
-    homePage.goToLoginPage();
-    LoginPage loginPage = new LoginPage(driver,wait);
-    loginPage.loginByAdmin();
-    AdminPage adminPage = new AdminPage(driver, wait);
-    Assert.assertTrue("All admin elements on page are displayed", adminPage.adminElementsIsDisplayed());
-    Assert.assertEquals(adminPage.getNoticeMessage(), "You are now logged in as admin");
+    LoginPage loginPage = this.goToAdminPage();
+    AdminPage adminPage = loginPage.loginByAdmin();
+    assertTrue("All admin elements on page are displayed", adminPage.adminElementsIsDisplayed());
+    assertEquals(adminPage.getNoticeMessage(), "You are now logged in as admin");
   }
 }

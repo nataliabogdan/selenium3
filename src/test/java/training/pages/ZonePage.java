@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
@@ -18,9 +19,21 @@ public class ZonePage extends BasePage {
   private List<WebElement> rows;
   @FindBy(xpath = "//td[3]/select[contains(@name,'[zone_code]')]//option[@selected='selected']")
   private List<WebElement> selectedZones;
+  @FindBy(xpath = "//*[@name='geo_zones_form']")
+  private WebElement zoneGrid;
 
-  public ZonePage(WebDriver driver, WebDriverWait wait) {
+  private ZonePage(WebDriver driver, WebDriverWait wait) {
     super(driver, wait);
+  }
+
+  public static ZonePage getNewInstance(WebDriver driver, WebDriverWait wait){
+    final ZonePage zonePage = new ZonePage(driver, wait);
+    zonePage.waitUntilVisible();
+    return zonePage;
+  }
+
+  private void waitUntilVisible() {
+    this.wait.until(ExpectedConditions.visibilityOf(this.zoneGrid));
   }
 
   public void getZones() {

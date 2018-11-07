@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
@@ -15,9 +16,21 @@ public class CountryPage extends BasePage {
 
   @FindBy(css = "tr[class*=row]")
   private List<WebElement> rows;
+  @FindBy(xpath = "//*[@name='countries_form']")
+  private WebElement countryGrid;
 
-  public CountryPage(WebDriver driver, WebDriverWait wait) {
+  private CountryPage(WebDriver driver, WebDriverWait wait) {
     super(driver, wait);
+  }
+
+  public static CountryPage getNewInstance(WebDriver driver, WebDriverWait wait){
+    final CountryPage countryPage = new CountryPage(driver, wait);
+    countryPage.waitUntilVisible();
+    return countryPage;
+  }
+
+  private void waitUntilVisible() {
+    this.wait.until(ExpectedConditions.visibilityOf(this.countryGrid));
   }
 
   public void getCountries() {

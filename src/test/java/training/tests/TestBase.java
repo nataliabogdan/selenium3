@@ -7,9 +7,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import training.pages.AdminPage;
-import training.pages.HomePage;
 import training.pages.LoginPage;
+import training.pages.ShopHomePage;
 
 import java.util.concurrent.TimeUnit;
 
@@ -18,6 +17,7 @@ public class TestBase {
   WebDriverWait wait;
 
   private final String shopURL = "http://localhost/litecart";
+  private final String adminURL = "http://localhost/litecart/admin/";
 
   @Before
   public void start(){
@@ -28,9 +28,9 @@ public class TestBase {
     caps.setCapability(ChromeOptions.CAPABILITY, options);
     driver = new ChromeDriver(caps);
     //неявные ожидания. используется для findElement - заметят появление быстрее. Для присутствия элемента
-    driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+    driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
     //явное ожидание wait.until().... для отсутсвия
-    wait = new WebDriverWait(driver, 10);
+    wait = new WebDriverWait(driver, 2);
 
 //    InternetExplorerOptions options = new InternetExplorerOptions();
 //    options.ignoreZoomSettings();
@@ -39,16 +39,15 @@ public class TestBase {
 //    wait = new WebDriverWait(driver, 10);
   }
 
-  public void loginByAdmin(){
-    HomePage homePage = new HomePage(driver,wait);
-    homePage.goToLoginPage();
-    LoginPage loginPage = new LoginPage(driver,wait);
-    loginPage.loginByAdmin();
+  public LoginPage goToAdminPage(){
+    this.driver.get(this.adminURL);
+    return LoginPage.getNewInstance(this.driver, this.wait);
   }
 
   //Goto Shop page
-  public void goToShopPage(){
-    this.driver.get(shopURL);
+  public ShopHomePage goToShopPage(){
+    this.driver.get(this.shopURL);
+    return ShopHomePage.getNewInstance(this.driver, this.wait);
   }
 
   @After

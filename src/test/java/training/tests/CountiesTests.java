@@ -7,16 +7,11 @@ public class CountiesTests extends TestBase{
 
   @Test
   public void checkAlphebeticalCounties(){
-    HomePage homePage = new HomePage(driver,wait);
-    homePage.goToLoginPage();
-    LoginPage loginPage = new LoginPage(driver,wait);
-    loginPage.loginByAdmin();
-    AdminPage adminPage = new AdminPage(driver, wait);
-    adminPage.goToCountryPage();
-    CountryPage countryPage = new CountryPage(driver, wait);
+    LoginPage loginPage = this.goToAdminPage();
+    AdminPage adminPage = loginPage.loginByAdmin();
+    CountryPage countryPage = adminPage.goToCountryPage();
     countryPage.getCountries();
-    adminPage.goToZonePage();
-    ZonePage zonePage = new ZonePage(driver, wait);
+    ZonePage zonePage = adminPage.goToZonePage();
     zonePage.getZones();
   }
 }

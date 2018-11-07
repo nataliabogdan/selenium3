@@ -3,6 +3,7 @@ package training.pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class LoginPage extends BasePage{
@@ -17,13 +18,24 @@ public class LoginPage extends BasePage{
   @FindBy(name = "login")
   private WebElement loginBtn;
 
-  public LoginPage(WebDriver driver, WebDriverWait wait) {
+  private LoginPage(WebDriver driver, WebDriverWait wait) {
     super(driver, wait);
   }
 
-  public void loginByAdmin(){
+  public static LoginPage getNewInstance(WebDriver driver, WebDriverWait wait){
+    final LoginPage loginPage = new LoginPage(driver, wait);
+    loginPage.waitUntilVisible();
+    return loginPage;
+  }
+
+  private void waitUntilVisible() {
+    this.wait.until(ExpectedConditions.visibilityOf(this.usernameInput));
+  }
+
+  public AdminPage loginByAdmin(){
     this.type(this.usernameInput, user);
     this.type(this.passwordInput, password);
     this.loginBtn.click();
+    return AdminPage.getNewInstance(this.driver, this.wait);
   }
 }

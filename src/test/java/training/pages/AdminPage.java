@@ -3,6 +3,7 @@ package training.pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class AdminPage extends BasePage {
@@ -32,8 +33,18 @@ public class AdminPage extends BasePage {
   @FindBy(xpath = "//span[text()='Geo Zones']")
   private WebElement zonelink;
 
-  public AdminPage(WebDriver driver, WebDriverWait wait) {
+  private AdminPage(WebDriver driver, WebDriverWait wait) {
     super(driver, wait);
+  }
+
+  public static AdminPage getNewInstance(WebDriver driver, WebDriverWait wait){
+    final AdminPage adminPage = new AdminPage(driver, wait);
+    adminPage.waitUntilVisible();
+    return adminPage;
+  }
+
+  private void waitUntilVisible() {
+    this.wait.until(ExpectedConditions.visibilityOf(this.widgetStats));
   }
 
   public Boolean adminElementsIsDisplayed(){
@@ -52,13 +63,15 @@ public class AdminPage extends BasePage {
   }
 
   //Goto Countries page
-  public void goToCountryPage(){
+  public CountryPage goToCountryPage(){
     this.countrylink.click();
+    return CountryPage.getNewInstance(this.driver, this.wait);
   }
 
   //Goto Zones page
-  public void goToZonePage(){
+  public ZonePage goToZonePage(){
     this.zonelink.click();
+    return ZonePage.getNewInstance(this.driver, this.wait);
   }
 
 }
