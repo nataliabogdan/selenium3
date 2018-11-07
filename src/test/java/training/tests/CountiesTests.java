@@ -1,10 +1,7 @@
 package training.tests;
 
 import org.junit.Test;
-import training.pages.AdminPage;
-import training.pages.CountryPage;
-import training.pages.HomePage;
-import training.pages.LoginPage;
+import training.pages.*;
 
 public class CountiesTests extends TestBase{
 
@@ -18,5 +15,8 @@ public class CountiesTests extends TestBase{
     adminPage.goToCountryPage();
     CountryPage countryPage = new CountryPage(driver, wait);
     countryPage.getCountries();
+    adminPage.goToZonePage();
+    ZonePage zonePage = new ZonePage(driver, wait);
+    zonePage.getZones();
   }
 }
