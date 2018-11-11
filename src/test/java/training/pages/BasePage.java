@@ -7,11 +7,13 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-class BasePage {
+public class BasePage {
   WebDriver driver;
   WebDriverWait wait;
 
@@ -90,6 +92,13 @@ class BasePage {
 
   static boolean isBlue(int[] colorArr){
     return (colorArr[2] > 0 && colorArr[0] == colorArr[1] && colorArr[1] == 0);
+  }
+
+  public static String generateTimeStemp(){
+    Calendar calendar = Calendar.getInstance();
+    SimpleDateFormat simpleformat = new SimpleDateFormat("YYYYMMdd_HHmmss");
+    String date = simpleformat.format(calendar.getTime());
+    return date;
   }
 
 }

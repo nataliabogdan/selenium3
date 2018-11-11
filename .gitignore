@@ -13,3 +13,14 @@ gradle-app.setting
 # # Work around https://youtrack.jetbrains.com/issue/IDEA-116898
 # gradle/wrapper/gradle-wrapper.properties
 .idea/workspace.xml
+*.xml
+.idea/workspace.xml
+.idea/workspace.xml
+.idea/workspace.xml
+*.xml
+out/test/classes/training/pages/AdminNavigationMenu.class
+out/test/classes/training/pages/AdminPage.class
+out/test/classes/training/pages/BasePage.class
+out/test/classes/training/tests/TestBase.class
+*.xml
+out/test/classes/training/pages/AdminPage.class

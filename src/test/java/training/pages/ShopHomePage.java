@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import training.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +22,17 @@ public class ShopHomePage extends BasePage {
   private WebElement campaigns;
   @FindBy(xpath = "//*[@id='box-campaigns']//a[@class='link']")
   private List<WebElement> campaignGoods;
+  @FindBy(xpath = "//a[text()='Create Account']")
+  private WebElement createAccountLink;
+  @FindBy(id = "notices")
+  private WebElement message;
+  @FindBy(xpath = "//a[text()='Logout']")
+  private WebElement logoutLink;
+  @FindBy(id = "box-account-login")
+  private WebElement loginBox;
+  @FindBy(name = "login")
+  private WebElement loginBtn;
+
 
   private ShopHomePage(WebDriver driver, WebDriverWait wait) {
     super(driver, wait);
@@ -88,5 +100,24 @@ public class ShopHomePage extends BasePage {
   public GoodPage openCampaignGood() {
     findFirstCampaignGood().click();
     return GoodPage.getNewInstance(this.driver, this.wait);
+  }
+
+  public RegistrationPage gotoRegistration(){
+    this.createAccountLink.click();
+    return RegistrationPage.getNewInstance(this.driver, this.wait);
+  }
+
+  public String getMessage(){
+    return this.message.getAttribute("outerText");
+  }
+
+  public void logout(){
+    this.logoutLink.click();
+  }
+
+  public void login(final String mail, final String pass){
+    type(this.loginBox.findElement(By.name("email")), mail);
+    type(this.loginBox.findElement(By.name("password")), pass);
+    this.loginBtn.click();
   }
 }
