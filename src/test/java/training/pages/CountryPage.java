@@ -33,7 +33,7 @@ public class CountryPage extends BasePage {
     this.wait.until(ExpectedConditions.visibilityOf(this.countryGrid));
   }
 
-  public void getCountries() {
+  public void checkCountries() {
     List<WebElement> rows = this.rows;
     List<String> displayedCountries = new ArrayList<>();
     List<String> sortedCountries = new ArrayList<>();

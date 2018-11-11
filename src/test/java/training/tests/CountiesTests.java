@@ -10,7 +10,7 @@ public class CountiesTests extends TestBase{
     LoginPage loginPage = this.goToAdminPage();
     AdminPage adminPage = loginPage.loginByAdmin();
     CountryPage countryPage = adminPage.goToCountryPage();
-    countryPage.getCountries();
+    countryPage.checkCountries();
     ZonePage zonePage = adminPage.goToZonePage();
     zonePage.getZones();
   }
