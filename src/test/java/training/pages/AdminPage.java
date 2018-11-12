@@ -32,6 +32,8 @@ public class AdminPage extends BasePage {
   private WebElement countrylink;
   @FindBy(xpath = "//span[text()='Geo Zones']")
   private WebElement zonelink;
+  @FindBy(xpath = "//span[text()= 'Catalog']")
+  private WebElement catalogLink;
 
   private AdminPage(WebDriver driver, WebDriverWait wait) {
     super(driver, wait);
@@ -72,6 +74,12 @@ public class AdminPage extends BasePage {
   public ZonePage goToZonePage(){
     this.zonelink.click();
     return ZonePage.getNewInstance(this.driver, this.wait);
+  }
+
+  //Goto Catalog page
+  public CatalogPage goToCatalogPage(){
+    this.catalogLink.click();
+    return CatalogPage.getNewInstance(this.driver, this.wait);
   }
 
 }
