@@ -36,7 +36,7 @@ public class TestBase {
 //   неявные ожидания. используется для findElement - заметят появление быстрее. Для присутствия элемента
     driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
     //явное ожидание wait.until().... для отсутсвия
-    wait = new WebDriverWait(driver, 2);
+    wait = new WebDriverWait(driver, 20);
 
 //    driver = new FirefoxDriver();
 //    driver.manage().window().maximize();

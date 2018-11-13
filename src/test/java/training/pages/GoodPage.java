@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
@@ -18,9 +19,15 @@ public class GoodPage extends BasePage {
   private WebElement productBox;
   @FindBy(id = "box-similar-products")
   private WebElement similarProductBox;
+  @FindBy(name = "add_cart_product")
+  private WebElement addToCart;
+  private String quantityCart  = "span.quantity";
+  @FindBy(xpath = "//a[text()='Checkout »']")
+  private WebElement cart;
+  @FindBy(name = "options[Size]")
+  List<WebElement> sizeOption;
 
-
-  GoodPage(WebDriver driver, WebDriverWait wait) {
+  private GoodPage(WebDriver driver, WebDriverWait wait) {
     super(driver, wait);
   }
 
@@ -66,5 +73,26 @@ public class GoodPage extends BasePage {
     String font1 =  this.productBox.findElement(By.className("regular-price")).getCssValue("font-size");
     String font2 =  this.productBox.findElement(By.className("campaign-price")).getCssValue("font-size");
     Assert.assertTrue(convertFontSize(font2) > convertFontSize(font1));
+  }
+
+  public ShopHomePage addToCart(int i){
+    this.addToCart.click();
+    this.wait.until(ExpectedConditions.textToBe(By.cssSelector(this.quantityCart), String.valueOf(i)));
+    this.driver.navigate().back();
+    return ShopHomePage.getNewInstance(this.driver, this.wait);
+  }
+
+  public CartPage gotoCartPage(){
+    this.cart.click();
+    return CartPage.getNewInstance(this.driver, this.wait);
+  }
+
+  public boolean isSizeOptionExist(){
+    return this.sizeOption.size() > 0;
+  }
+
+  public void selectSize(){
+    Select option = new Select(this.driver.findElement(By.name("options[Size]")));
+    option.selectByVisibleText("Small");
   }
 }

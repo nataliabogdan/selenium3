@@ -32,7 +32,8 @@ public class ShopHomePage extends BasePage {
   private WebElement loginBox;
   @FindBy(name = "login")
   private WebElement loginBtn;
-
+  @FindBy(xpath = "(//li[@class='product column shadow hover-light'])[1]")
+  private WebElement firstGood;
 
   private ShopHomePage(WebDriver driver, WebDriverWait wait) {
     super(driver, wait);
@@ -119,5 +120,10 @@ public class ShopHomePage extends BasePage {
     type(this.loginBox.findElement(By.name("email")), mail);
     type(this.loginBox.findElement(By.name("password")), pass);
     this.loginBtn.click();
+  }
+
+  public GoodPage findFirstGoodAndOpenIt(){
+    this.firstGood.click();
+    return GoodPage.getNewInstance(this.driver, this.wait);
   }
 }
