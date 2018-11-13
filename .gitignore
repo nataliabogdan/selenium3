@@ -24,3 +24,9 @@ out/test/classes/training/pages/BasePage.class
 out/test/classes/training/tests/TestBase.class
 *.xml
 out/test/classes/training/pages/AdminPage.class
+out/test/classes/training/pages/CartPage.class
+out/test/classes/training/pages/GoodPage.class
+out/test/classes/training/pages/ShopHomePage.class
+out/test/classes/training/tests/AddingGoods.class
+out/test/classes/training/tests/CartTest.class
+out/test/classes/training/tests/TestBase.class
