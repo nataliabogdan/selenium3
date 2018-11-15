@@ -5,6 +5,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.text.SimpleDateFormat;
@@ -101,4 +102,18 @@ public class BasePage {
     return date;
   }
 
+  public void openLinks(List<WebElement> list) {
+    for (WebElement element : list) {
+      String firstWindow = this.driver.getWindowHandle();
+      element.click();
+      this.wait.until(ExpectedConditions.numberOfWindowsToBe(2));
+      for (String windowHandle : this.driver.getWindowHandles()) {
+        if (!windowHandle.equals(firstWindow)) {
+          this.driver.switchTo().window(windowHandle);
+          this.driver.close();
+          this.driver.switchTo().window(firstWindow);
+        }
+      }
+    }
+  }
 }

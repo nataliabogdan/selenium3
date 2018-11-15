@@ -18,6 +18,10 @@ public class CountryPage extends BasePage {
   private List<WebElement> rows;
   @FindBy(xpath = "//*[@name='countries_form']")
   private WebElement countryGrid;
+  @FindBy(className = "button")
+  private WebElement addNewCountry;
+  @FindBy(xpath = "//*[@method='post']")
+  private WebElement formNewContry;
 
   private CountryPage(WebDriver driver, WebDriverWait wait) {
     super(driver, wait);
@@ -63,5 +67,12 @@ public class CountryPage extends BasePage {
     }
   }
 
+  public void initNewCountryCreation(){
+    this.addNewCountry.click();
+    this.wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@method='post']")));
+  }
 
+  public List<WebElement> getExternalLinks() {
+    return this.driver.findElements(By.xpath("//a[@href]/i[contains(@class,'external')]"));
+  }
 }

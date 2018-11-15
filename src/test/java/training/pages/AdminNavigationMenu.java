@@ -20,6 +20,8 @@ public class AdminNavigationMenu extends BasePage {
   private WebElement header;
   @FindBy(id = "box-apps-menu")
   private WebElement appsBox;
+  @FindBy(xpath = "//*[@id='app-'][3]")
+  private WebElement countriesLink;
 
   private AdminNavigationMenu(WebDriver driver, WebDriverWait wait) {
     super(driver, wait);
