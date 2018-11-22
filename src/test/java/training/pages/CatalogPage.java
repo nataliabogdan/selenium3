@@ -1,7 +1,11 @@
 package training.pages;
 
+import org.junit.Assert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.logging.LogEntry;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -19,6 +23,9 @@ public class CatalogPage extends BasePage {
   private WebElement notice;
   @FindBy(xpath = "//td/a[contains(@href,'product')][text()]")
   private List<WebElement> products;
+  private String category = "http://localhost/litecart/admin/?app=catalog&doc=catalog&category_id=1";
+  @FindBy(xpath = "//tr[contains(@class,'row')]/td[3]/a[contains(@href,'edit')]")
+  private List<WebElement> goods;
 
   CatalogPage(WebDriver driver, WebDriverWait wait) {
     super(driver, wait);
@@ -28,6 +35,39 @@ public class CatalogPage extends BasePage {
     final CatalogPage catalogPage = new CatalogPage(driver, wait);
     catalogPage.waitUntilVisible();
     return catalogPage;
+  }
+
+  public void openCategory(){
+    this.driver.findElement(By.xpath("//a[@href = '"+ category+"']")).click();
+  }
+
+  public  List<String> getLogsFromNewTab(){
+    List<WebElement> goodList = this.goods;
+    List<String> logs = new ArrayList<>();
+    for (WebElement element : goodList) {
+      ((JavascriptExecutor) driver).executeScript("window.open('" + element.getAttribute("href")+"', 'new_window')");
+      for(LogEntry l : driver.manage().logs().get("browser").getAll()){
+        logs.add(l.toString()+ "\n");
+      }
+      this.driver.switchTo().window("new_window");
+      List<String> tabs = new ArrayList<>(this.driver.getWindowHandles());
+      this.driver.close();
+      this.driver.switchTo().window(tabs.get(0));
+    }
+    return logs;
+  }
+
+  public  List<String> getLogsFromCurrentPage(){
+    List<WebElement> goodList = this.goods;
+    List<String> logs = new ArrayList<>();
+    for (int i = 0; i < goodList.size(); i++) {
+      goodList.get(i).click();
+      for (LogEntry l : driver.manage().logs().get("browser").getAll()) {
+        logs.add(l.toString() + "\n");
+      }
+      this.driver.navigate().back();
+    }
+    return logs;
   }
 
   private void waitUntilVisible() {
