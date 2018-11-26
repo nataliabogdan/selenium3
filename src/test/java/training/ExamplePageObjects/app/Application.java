@@ -1,14 +1,14 @@
-package training.ExamplePageObjects;
+package training.ExamplePageObjects.app;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import training.ExamplePageObjects.pages.AdminPanelLoginPage;
+import training.ExamplePageObjects.model.Customer;
+import training.ExamplePageObjects.pages.CustomerListPage;
+import training.ExamplePageObjects.pages.RegistrationPage;
 
 import java.util.Set;
-
-import static java.util.stream.Collectors.toSet;
 
 public class Application {
 

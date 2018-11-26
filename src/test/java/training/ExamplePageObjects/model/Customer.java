@@ -1,4 +1,4 @@
-package training.ExamplePageObjects;
+package training.ExamplePageObjects.model;
 
 public class Customer {
 

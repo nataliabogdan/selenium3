@@ -1,12 +1,10 @@
-package training.ExamplePageObjects;
+package training.ExamplePageObjects.tests;
 
 import com.tngtech.java.junit.dataprovider.DataProviderRunner;
 import com.tngtech.java.junit.dataprovider.UseDataProvider;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import training.ExamplePageObjects.Customer;
-import training.ExamplePageObjects.DataProviders;
-import training.ExamplePageObjects.TestBase2;
+import training.ExamplePageObjects.model.Customer;
 
 import static org.junit.Assert.assertTrue;
 

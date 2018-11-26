@@ -1,7 +1,7 @@
-package training.ExamplePageObjects;
+package training.ExamplePageObjects.tests;
 
 import org.junit.Before;
-import training.ExamplePageObjects.Application;
+import training.ExamplePageObjects.app.Application;
 
 public class TestBase2 {
 
