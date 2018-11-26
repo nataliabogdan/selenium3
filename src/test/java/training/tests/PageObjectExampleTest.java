@@ -9,6 +9,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 import training.Customer;
 import training.DataProviders;
+import static org.junit.Assert.assertTrue;
+
+import java.util.Set;
+
+import static java.util.stream.Collectors.toSet;
 
 @RunWith(DataProviderRunner.class)
 public class PageObjectExampleTest extends TestBase {
@@ -16,7 +21,19 @@ public class PageObjectExampleTest extends TestBase {
   @Test
   @UseDataProvider(value = "validCustomers", location = DataProviders.class)
   public void canRegisterCustomer(Customer customer) {
-    
+
+    driver.get("http://localhost/litecart/admin");
+    if (driver.findElements(By.id("box-login")).size() > 0) {
+      driver.findElement(By.name("username")).sendKeys("admin");
+      driver.findElement(By.name("password")).sendKeys("admin");
+      driver.findElement(By.name("login")).click();
+      wait.until((WebDriver d) -> d.findElement(By.id("box-apps-menu")));
+    }
+    driver.get("http://localhost/litecart/admin/?app=customers&doc=customers");
+    Set<String> oldIds = driver.findElements(By.cssSelector("table.dataTable tr.row")).stream()
+            .map(e -> e.findElements(By.tagName("td")).get(2).getText())
+            .collect(toSet());
+
     driver.get("http://localhost/litecart/en/create_account");
 
     driver.findElement(By.name("firstname")).sendKeys(customer.getFirstname());
@@ -38,8 +55,12 @@ public class PageObjectExampleTest extends TestBase {
     driver.findElement(By.name("confirmed_password")).sendKeys(customer.getPassword());
     driver.findElement(By.name("create_account")).click();
 
-
-
+    driver.get("http://localhost/litecart/admin/?app=customers&doc=customers");
+    Set<String> newIds = driver.findElements(By.cssSelector("table.dataTable tr.row")).stream()
+            .map(e -> e.findElements(By.tagName("td")).get(2).getText())
+            .collect(toSet());
+    assertTrue(newIds.containsAll(oldIds));
+    assertTrue(newIds.size() == oldIds.size() + 1);
 
   }
 }
