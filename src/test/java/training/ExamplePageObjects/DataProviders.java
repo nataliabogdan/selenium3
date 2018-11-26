@@ -1,4 +1,5 @@
-package training;
+package training.ExamplePageObjects;
+
 import com.tngtech.java.junit.dataprovider.DataProvider;
 
 public class DataProviders {
