@@ -22,8 +22,4 @@ public class PageObjectExampleTest extends TestBase2 {
     assertTrue(newIds.containsAll(oldIds));
     assertTrue(newIds.size() == oldIds.size() + 1);
   }
-
-
-
-
 }

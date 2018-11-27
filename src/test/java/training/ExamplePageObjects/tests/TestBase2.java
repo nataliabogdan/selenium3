@@ -5,8 +5,8 @@ import training.ExamplePageObjects.app.Application;
 
 public class TestBase2 {
 
-  public static ThreadLocal<Application> tlApp = new ThreadLocal<>();
-  public Application app;
+  private static ThreadLocal<Application> tlApp = new ThreadLocal<>();
+  Application app;
 
   @Before
   public void start() {
